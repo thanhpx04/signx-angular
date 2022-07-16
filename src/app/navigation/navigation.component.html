@@ -1,5 +1,27 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand">SignX</a>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a routerLink="/" class="navbar-brand">SignX</a>
+        </div>
+        
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#" (click)="onSelect('dashboard')">Dashboard</a></li>
+                <li><a href="#" (click)="onSelect('historical-user')">Historical User</a></li>
+            </ul>
+        </div>
+        <!-- <div class="collapse navbar-collapse"> -->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" role="button">User <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        <!-- </div> -->
+    </div>
     <!-- <a class="navbar-brand" routerLink="/dashboard">Start Bootstrap</a>
     <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" data-cy="topNavToggleSideNav" (click)="toggleSideNav()">
         <fa-icon [icon]='["fas", "bars"]'></fa-icon>

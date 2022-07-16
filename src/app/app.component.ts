@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'signx-angular';
+  loadedFeature = 'dashboard';
+
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
+  }
 }
