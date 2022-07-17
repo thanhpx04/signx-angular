@@ -1,0 +1,9 @@
+<app-navigation (featureSelected)="onNavigate($event)"></app-navigation>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <app-dashboard *ngIf="loadedFeature === 'dashboard'"></app-dashboard>
+      <app-historical-user *ngIf="loadedFeature === 'historical-user'"></app-historical-user>
+    </div>
+  </div>
+</div>

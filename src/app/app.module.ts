@@ -7,6 +7,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricalUserComponent } from './historical-user/historical-user.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,12 @@ import { LoginComponent } from './login/login.component';
     NavigationComponent,
     DashboardComponent,
     HistoricalUserComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

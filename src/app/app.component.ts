@@ -6,9 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  loadedFeature = 'dashboard';
-
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
-  }
 }
