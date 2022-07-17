@@ -1,9 +1,15 @@
 <app-navigation (featureSelected)="onNavigate($event)"></app-navigation>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <app-dashboard *ngIf="loadedFeature === 'dashboard'"></app-dashboard>
-      <app-historical-user *ngIf="loadedFeature === 'historical-user'"></app-historical-user>
-    </div>
+<div id="layoutSidenav">
+  <div id="layoutSidenav_nav">
+    <p>aaaa</p>
+  </div>
+  <div id="layoutSidenav_content">
+      <main>
+          <div class="container-fluid">
+            <app-dashboard *ngIf="loadedFeature === 'dashboard'"></app-dashboard>
+            <app-historical-user *ngIf="loadedFeature === 'historical-user'"></app-historical-user>
+          </div>
+      </main>
+      <app-footer></app-footer>
   </div>
 </div>

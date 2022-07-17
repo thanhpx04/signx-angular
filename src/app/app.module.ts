@@ -9,6 +9,8 @@ import { HistoricalUserComponent } from './historical-user/historical-user.compo
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     HistoricalUserComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    SidebarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
