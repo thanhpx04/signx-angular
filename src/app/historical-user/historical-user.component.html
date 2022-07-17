@@ -1,1 +1,19 @@
-<p>historical-user works!</p>
+<form>
+    <div class="form-group form-inline">Full text search: <input class="form-control ml-2" type="text" name="searchTerm" /></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"><span>Created Time</span></th>
+                <th scope="col"><span>Name</span></th>
+                <th scope="col"><span>Description</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let historicalUser of listHistoricalUser">
+                <td>{{ historicalUser.createdTime }}</td>
+                <td>{{ historicalUser.name }}</td>
+                <td>{{ historicalUser.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+</form>
