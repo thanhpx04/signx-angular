@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Subject, tap, throwError } from "rxjs";
-import { User } from "./user.model";
+import { AuthService } from "../shared/auth/auth.service";
 
 export interface LoginResponseData {
     token?: string,
@@ -10,8 +10,7 @@ export interface LoginResponseData {
 
 @Injectable({providedIn: 'root'})
 export class LoginService {
-    user = new Subject<User>();
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private authService: AuthService) {}
 
     login(username: string, password: string) {
         return this.http.post<LoginResponseData>(
@@ -24,7 +23,7 @@ export class LoginService {
         .pipe(
           catchError(this.handleError),
           tap(resData => {
-            this.handleAuthentication(username, resData.token);
+            this.authService.handleAuthentication(username, resData.token);
           })
         );
     }
@@ -35,10 +34,5 @@ export class LoginService {
             errorMessage = errorRes.error.message;
         }
         return throwError(errorMessage);
-    }
-
-    private handleAuthentication(email: string, token: string) {
-        const user = new User(email, token);
-        this.user.next(user);
     }
 }
