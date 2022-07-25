@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://112.78.1.209:8181/swagger-ui'
+  API_URL: 'http://112.78.1.209:8181'
 };
 
 /*

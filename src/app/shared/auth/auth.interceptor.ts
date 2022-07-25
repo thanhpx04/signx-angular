@@ -15,10 +15,12 @@ export class AuthInterceptorService implements HttpInterceptor {
             take(1),
             exhaustMap(user => {
                 if (!user) {
-                  return next.handle(req);
+                    return next.handle(req);
                 }
                 const modifiedReq = req.clone({
-                    headers: new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${user.token}`)
+                    headers: new HttpHeaders()
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', `Bearer ${user.token}`)
                 });
                 return next.handle(modifiedReq);
             }));
