@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Subject, tap, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
 import { AuthService } from "../shared/auth/auth.service";
 
 export interface LoginResponseData {
@@ -14,7 +15,7 @@ export class LoginService {
 
     login(username: string, password: string) {
         return this.http.post<LoginResponseData>(
-            'https://thingsboard.cloud/api/auth/login',
+            environment.API_URL + '/api/auth/login',
             {
                 "username": username,
                 "password": password

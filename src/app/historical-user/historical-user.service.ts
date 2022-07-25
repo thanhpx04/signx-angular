@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { exhaustMap, map, take, tap } from "rxjs";
+import { environment } from "src/environments/environment";
 
 import { AuthService } from "../shared/auth/auth.service";
 import { HistoricalUser, HistoricalUsers } from "./historical-user.model";
@@ -21,7 +22,7 @@ export class HistoricalUserService {
     
     fetListHistoricalUser() {
       return this.http.get<HistoricalUsers>(
-        'https://thingsboard.cloud:443/api/audit/logs',
+        environment.API_URL + '/api/audit/logs',
         {
           params: new HttpParams().set('pageSize', 10).set('page', 0).set('sortProperty', 'createdTime').set('sortOrder', 'DESC'),
         })
