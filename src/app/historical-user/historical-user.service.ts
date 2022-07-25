@@ -20,29 +20,15 @@ export class HistoricalUserService {
     }
     
     fetListHistoricalUser() {
-        // this tells RxJS is that I only want to take one value from that observable and thereafter, 
-        // it should automatically unsubscribe.
-        return this.authService.user.pipe(
-            take(1),
-            exhaustMap(user => {
-              return this.http.get<HistoricalUsers>(
-                'https://thingsboard.cloud:443/api/audit/logs',
-                {
-                  params: new HttpParams().set('pageSize', 10).set('page', 0).set('sortProperty', 'createdTime').set('sortOrder', 'DESC'),
-                  headers: new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${user.token}`)
-                }
-              );
-            }),
-            // map(response => {
-            //   return response.data.map(historicalUser => {
-            //     return {
-            //       ...historicalUser
-            //     };
-            //   });
-            // }),
-            tap(historicalUsers => {
-              this.setListHistoricalUser(historicalUsers.data);
-            })
-          );
+      return this.http.get<HistoricalUsers>(
+        'https://thingsboard.cloud:443/api/audit/logs',
+        {
+          params: new HttpParams().set('pageSize', 10).set('page', 0).set('sortProperty', 'createdTime').set('sortOrder', 'DESC'),
+        })
+        .pipe(
+          tap(historicalUsers => {
+            this.setListHistoricalUser(historicalUsers.data);
+          })
+        );
     }
 }
