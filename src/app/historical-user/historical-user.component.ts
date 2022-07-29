@@ -16,7 +16,7 @@ export class HistoricalUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.historicalUserService.fetListHistoricalUser().subscribe( response => {
-      this.listHistoricalUser = response.data;
+      this.listHistoricalUser = response;
     });
   }
 

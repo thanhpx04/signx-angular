@@ -27,8 +27,16 @@ export class HistoricalUserService {
           params: new HttpParams().set('pageSize', 10).set('page', 0).set('sortProperty', 'createdTime').set('sortOrder', 'DESC'),
         })
         .pipe(
-          tap(historicalUsers => {
-            this.setListHistoricalUser(historicalUsers.data);
+          map(historicalUsers => {
+            return historicalUsers.data.map(hu => {
+              return {
+                ...hu,
+                createdDateTime: hu.createdTime ? (new Date(hu.createdTime)).toLocaleString() : (new Date()).toLocaleString()
+              };
+            });
+          }),
+          tap(data => {
+            this.setListHistoricalUser(data);
           })
         );
     }
