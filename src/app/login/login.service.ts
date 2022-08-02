@@ -24,7 +24,7 @@ export class LoginService {
         .pipe(
           catchError(this.handleError),
           tap(resData => {
-            this.authService.handleAuthentication(username, resData.token);
+            this.authService.handleAuthentication(resData.token, resData.refreshToken);
           })
         );
     }

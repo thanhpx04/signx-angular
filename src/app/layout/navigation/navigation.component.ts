@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -10,6 +11,11 @@ import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
 export class NavigationComponent implements OnInit {
   public iconOnlyToggled = false;
   public sidebarToggled = false;
+
+  constructor(private router: Router, config: NgbDropdownConfig) {
+    config.placement = "bottom-right";
+  }
+  ngOnInit() {}
 
   toggleRightSidebar() {
     document.querySelector('.sidebar-offcanvas').classList.toggle('active');
@@ -23,10 +29,10 @@ export class NavigationComponent implements OnInit {
       document.querySelector("body").classList.remove("sidebar-icon-only");
     }
   }
-
-  constructor(config: NgbDropdownConfig) {
-    config.placement = "bottom-right";
+  
+  logOut() {
+    localStorage.removeItem("tokenData");
+    this.router.navigate(['/login']);
   }
-  ngOnInit() {}
 
 }

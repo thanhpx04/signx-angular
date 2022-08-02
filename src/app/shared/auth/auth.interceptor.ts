@@ -11,16 +11,16 @@ export class AuthInterceptorService implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         // this tells RxJS is that I only want to take one value from that observable and thereafter, 
         // it should automatically unsubscribe.
-        return this.authService.user.pipe(
+        return this.authService.tokenModel.pipe(
             take(1),
-            exhaustMap(user => {
-                if (!user) {
+            exhaustMap(token => {
+                if (!token) {
                     return next.handle(req);
                 }
                 const modifiedReq = req.clone({
                     headers: new HttpHeaders()
                     .set('Content-Type', 'application/json')
-                    .set('Authorization', `Bearer ${user.token}`)
+                    .set('Authorization', `Bearer ${token.token}`)
                 });
                 return next.handle(modifiedReq);
             }));

@@ -1,31 +1,39 @@
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { LoginResponseData } from "src/app/login/login.service";
+import { environment } from "src/environments/environment";
 
-import { User } from "./user.model";
+import { TokenModel } from "./token.model";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-    user = new BehaviorSubject<User>(null);
-    constructor() {}
+    tokenModel = new BehaviorSubject<TokenModel>(null);
+    constructor(private http: HttpClient) { }
 
-    handleAuthentication(email: string, token: string) {
-        const user = new User(email, token);
-        this.user.next(user);
-        localStorage.setItem('userData', JSON.stringify(user));
+    handleAuthentication(token: string, refreshToken: string) {
+        const tokenModel = new TokenModel(token, refreshToken);
+        this.tokenModel.next(tokenModel);
+        localStorage.setItem('tokenData', JSON.stringify(tokenModel));
     }
 
     autoLogin() {
-        const userData: {
-            email: string;
-            _token: string;
-        } = JSON.parse(localStorage.getItem('userData'));
-        if (!userData) {
+        const tokenData: TokenModel = JSON.parse(localStorage.getItem('tokenData'));
+        if (!tokenData) {
             return;
         }
 
-        const loadedUser = new User(userData.email, userData._token);
-        if(loadedUser.token) {
-            this.user.next(loadedUser);
+        const loadedTokenModel = new TokenModel(tokenData.token, tokenData.refreshToken);
+        if (loadedTokenModel.token) {
+            this.tokenModel.next(loadedTokenModel);
         }
+    }
+
+    refreshToken(tokenModel: any) {
+        return this.http.post<LoginResponseData>(environment.API_URL + '/api/auth/token', {
+            tokenModel
+        }, {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        });
     }
 }
