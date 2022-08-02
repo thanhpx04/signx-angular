@@ -7,16 +7,18 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>Created time</th>
-                  <th>Entity name</th>
-                  <th>User name</th>
-                  <th>Action type</th>
-                  <th>Action status</th>
+                  <th style="width: 150px;">Created time</th>
+                  <th style="width: 20%;">Entity Type</th>
+                  <th style="width: 20%;">Entity Name</th>
+                  <th style="width: 33%;">User</th>
+                  <th style="width: 33%;">Type</th>
+                  <th style="width: 33%;">Status</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let historicalUser of listHistoricalUser">
                   <td>{{historicalUser.createdDateTime}}</td>
+                  <td>{{historicalUser.entityId.entityType}}</td>
                   <td>{{historicalUser.entityName}}</td>
                   <td>{{historicalUser.userName}}</td>
                   <td>{{historicalUser.actionType}}</td>
